@@ -1,3 +1,4 @@
+import gc
 import multiprocessing
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -80,6 +81,9 @@ class VibeNetPlugin(BeetsPlugin):
                     if write_tags:
                         it.write()
                 
+                del scores
+                gc.collect()
+
                 finished += 1
                 self._log.info(
                     "Progress: [{}/{}] ({} - {} - {})",
