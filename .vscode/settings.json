@@ -1,0 +1,7 @@
+{
+    "pylint.args": [
+        "--max-line-length=999",
+        "--disable",
+        "C0111,C0114,C0115,E0611",
+    ]
+}
