@@ -1,3 +1,4 @@
+import contextvars
 import gc
 import multiprocessing
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -62,7 +63,10 @@ class VibeNetPlugin(BeetsPlugin):
         finished = 0
 
         with ThreadPoolExecutor(max_workers=threads) as ex:
-            futs = {ex.submit(worker, it): i for i, it in enumerate(items)}
+            futs = {
+                ex.submit(contextvars.copy_context().run, worker, it): i
+                for i, it in enumerate(items)
+            }
             for fut in as_completed(futs):
                 idx = futs[fut]
 
