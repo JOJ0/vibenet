@@ -5,3 +5,4 @@ runs/
 dist/
 venv/
 __pycache__/
+.python-version
